@@ -122,3 +122,24 @@ input[type="text"]:focus {
   opacity: 0.75;
   cursor: pointer;
 }
+
+.hide {
+  display: none;
+}
+
+.back-btn {
+  color: red;
+  font-size: 2rem;
+}
+
+.mixed-item {
+  margin-top: 2rem;
+  flex-direction: column;
+}
+
+.mixed-item input {
+  margin-top: 1rem;
+  width: 100%;
+  font-size: 1.2rem;
+  outline-color: blue;
+}

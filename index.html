@@ -13,33 +13,46 @@
 </head>
 
 <body>
-    <section class="section1 section">
-        <div class="container">
-            <h1 class="title">복습할 Topic을 추가해주세요</h1>
-            <form>
-                <input type="text" placeholder="Topic" class="input-topic">
-                <button class="add-btn enabled btn">추가
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-                <div class="disabled-btns d-flex">
-                    <button class="reset-btn disabled btn">리셋
-                        <i class="fa-solid fa-rotate"></i>
+    <div class="first-page">
+        <section class="section1 section">
+            <div class="container">
+                <h1 class="title">복습할 Topic을 추가해주세요</h1>
+                <form>
+                    <input type="text" placeholder="Topic" class="input-topic">
+                    <button class="add-btn enabled btn">추가
+                        <i class="fa-solid fa-plus"></i>
                     </button>
-                    <button class="mix-btn disabled btn">섞기
-                        <i class="fa-solid fa-arrows-turn-right"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </section>
+                    <div class="disabled-btns d-flex">
+                        <button class="reset-btn btn" disabled>리셋
+                            <i class="fa-solid fa-rotate"></i>
+                        </button>
+                        <button class="mix-btn btn" disabled>섞기
+                            <i class="fa-solid fa-arrows-turn-right"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="section2 section">
+            <div class="container">
+                <ul class="topics"></ul>
+            </div>
+        </section>
+    </div>
 
-    <section class="section2 section">
-        <div class="container">
-            <ul class="topics">
 
-            </ul>
-        </div>
-    </section>
+    <div class="second-page">
+        <section class="section3 section">
+            <div class="container">
+                <span class="hide back-btn enabled">
+                    <i class="fa-solid fa-angles-left"></i>
+                </span>
+                <ul class="mixed-items">
+
+                </ul>
+            </div>
+        </section>
+    </div>
 
     <script type="module" src="main.js"></script>
 </body>
