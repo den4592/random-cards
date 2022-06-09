@@ -31,7 +31,9 @@ body {
 
 .container {
   width: 100%;
+  max-width: 800px;
   padding: 0 4rem;
+  margin: 0 auto;
 }
 
 form {
@@ -61,6 +63,10 @@ input[type="text"]:focus {
 
 .btn {
   color: #fff;
+  opacity: 0.3;
+  text-align: start;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   max-width: 280px;
   margin: 0 auto;
@@ -72,18 +78,34 @@ input[type="text"]:focus {
   background: linear-gradient(90deg, #00d2ff 0%, #a0a6ee 100%);
 }
 
-.btn:hover {
+.enabled {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.enabled:hover {
   opacity: 0.75;
+}
+
+.disabled-btns {
+  margin-top: 1rem;
+  flex-direction: column;
+}
+
+.btn + .btn {
+  margin-top: 1rem;
 }
 
 .topics {
   list-style: none;
+  width: 100%;
 }
 
 .topic {
-  background-color: rgb(128, 0, 255);
+  background-color: rgba(40, 81, 133, 0.954);
   padding: 1rem 2rem;
   font-size: 1.2rem;
+  max-width: 1200px;
   justify-content: space-between;
   color: #fff;
 }

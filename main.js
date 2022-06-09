@@ -1,6 +1,8 @@
-const btn = document.querySelector(".btn");
+const addBtn = document.querySelector(".add-btn");
 const inputedTopic = document.querySelector(".input-topic");
 const topics = document.querySelector(".topics");
+const resetBtn = document.querySelector(".reset-btn");
+const mixBtn = document.querySelector(".mix-btn");
 
 const addTopic = (inputedTopic) => {
   //topic 만들기
@@ -26,8 +28,22 @@ const addTopic = (inputedTopic) => {
   }
 };
 
-btn.addEventListener("click", (e) => {
+addBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  if (inputedTopic.value == "") {
+    alert("Topic을 추가해주세요");
+    return false;
+  }
   addTopic(inputedTopic);
   inputedTopic.value = "";
+  resetBtn.classList.add("enabled");
+  mixBtn.classList.add("enabled");
+});
+
+resetBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  inputedTopic.value == "";
+  topics.innerHTML = "";
+  resetBtn.classList.remove("enabled");
+  mixBtn.classList.remove("enabled");
 });
