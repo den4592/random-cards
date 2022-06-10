@@ -7,6 +7,7 @@ const firstPage = document.querySelector(".first-page");
 const secondPage = document.querySelector(".second-page");
 let itemList = []; //mixed로 들어갈 아이템들
 const mixedItems = document.querySelector(".mixed-items");
+let topicKeyCount = 0;
 
 //section2에 Topic이 존재하는지 체크 (비어있으면 - 값 존재 x)
 const checkIfEmpty = () => {
@@ -24,13 +25,69 @@ const checkIfNotEmpty = () => {
   mixBtn.removeAttribute("disabled");
 };
 
+//localStorage 리셋 후 key, value 추가
+const localStorageReset = () => {
+  localStorage.clear();
+  let changeTopic = document.querySelectorAll(".topic");
+  for (let i = 0; i < topics.children.length; i++) {
+    localStorage.setItem(`topic${i + 1}`, changeTopic[i].firstChild.innerHTML);
+    changeTopic[i].classList.remove(changeTopic[i].classList[2]);
+    changeTopic[i].classList.add(`topic${i + 1}`);
+  }
+};
+
+//localStorage에 뭐라도 있으면
+if (localStorage.length > 0) {
+  for (let i = 1; i <= localStorage.length; i++) {
+    checkIfNotEmpty();
+    let span = document.createElement("span");
+    let data = localStorage.getItem(`topic${i}`);
+    span.innerHTML = data;
+    let topic = document.createElement("li");
+    topic.className = "topic";
+    topic.classList.add("d-flex");
+    topic.classList.add(`topic${i}`);
+    topic.appendChild(span);
+    topics.appendChild(topic);
+
+    //mixed될 아이템들
+    itemList.push(data);
+
+    //삭제 버튼 만들기
+    let item = document.createElement("i");
+    item.className = "fa-solid";
+    item.classList.add("fa-trash-can");
+    item.classList.add("remove-topic");
+    topic.appendChild(item);
+
+    //topic 삭제 기능
+    let removeTopic = document.querySelectorAll(".remove-topic");
+    for (let i = 0; i < removeTopic.length; i++) {
+      removeTopic[i].addEventListener("click", () => {
+        removeTopic[i].parentElement.remove();
+        localStorage.removeItem(removeTopic[i].parentElement.classList[2]);
+        localStorageReset();
+        if (topics.innerHTML == "") {
+          checkIfEmpty();
+        }
+      });
+    }
+  }
+} else {
+  //Local storage is empty
+}
+
 //section2에 Topic 추가
 const addTopic = (inputedTopic) => {
   //topic 만들기
   let topic = document.createElement("li");
+  let span = document.createElement("span");
   topic.className = "topic";
   topic.classList.add("d-flex");
-  topic.innerHTML = inputedTopic.value;
+  span.innerHTML = inputedTopic.value;
+  topicKeyCount = localStorage.length + 1;
+  localStorage.setItem(`topic${topicKeyCount}`, inputedTopic.value);
+  topic.appendChild(span);
   topics.appendChild(topic);
 
   //mixed될 아이템들
@@ -47,7 +104,9 @@ const addTopic = (inputedTopic) => {
   let removeTopic = document.querySelectorAll(".remove-topic");
   for (let i = 0; i < removeTopic.length; i++) {
     removeTopic[i].addEventListener("click", () => {
+      localStorage.removeItem(removeTopic[i].parentElement.classList[2]);
       removeTopic[i].parentElement.remove();
+      localStorageReset(inputedTopic);
       if (topics.innerHTML == "") {
         checkIfEmpty();
       }
@@ -73,7 +132,8 @@ addBtn.addEventListener("click", (e) => {
 
 resetBtn.addEventListener("click", (e) => {
   e.preventDefault();
-
+  localStorage.clear();
+  topicKeyCount = 0;
   //itemList 초기화
   if (itemList.length >= 1) {
     itemList = [];

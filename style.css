@@ -110,6 +110,12 @@ input[type="text"]:focus {
   color: #fff;
 }
 
+.mixed-items .topic::after {
+  content: "";
+  width: 100%;
+  background-color: red;
+}
+
 .topic + .topic {
   margin-top: 1.5rem;
 }
