@@ -37,7 +37,7 @@ const localStorageReset = () => {
 };
 
 //localStorage에 뭐라도 있으면
-if (localStorage.length > 0) {
+if (localStorage.length >= 1) {
   for (let i = 1; i <= localStorage.length; i++) {
     checkIfNotEmpty();
     let span = document.createElement("span");
@@ -63,10 +63,16 @@ if (localStorage.length > 0) {
     //topic 삭제 기능
     let removeTopic = document.querySelectorAll(".remove-topic");
     for (let i = 0; i < removeTopic.length; i++) {
-      removeTopic[i].addEventListener("click", () => {
+      removeTopic[i].addEventListener("click", (e) => {
         removeTopic[i].parentElement.remove();
+        console.log(itemList);
+        let idx = itemList.indexOf(removeTopic[i].parentElement.firstChild.innerHTML);
+        if (idx !== -1) {
+          itemList.splice(idx, 1);
+        }
         localStorage.removeItem(removeTopic[i].parentElement.classList[2]);
-        localStorageReset();
+        localStorageReset(inputedTopic);
+        console.log(itemList);
         if (topics.innerHTML == "") {
           checkIfEmpty();
         }
@@ -106,6 +112,10 @@ const addTopic = (inputedTopic) => {
     removeTopic[i].addEventListener("click", () => {
       localStorage.removeItem(removeTopic[i].parentElement.classList[2]);
       removeTopic[i].parentElement.remove();
+      let idx = itemList.indexOf(removeTopic[i].parentElement.firstChild.innerHTML);
+      if (idx !== -1) {
+        itemList.splice(idx, 1);
+      }
       localStorageReset(inputedTopic);
       if (topics.innerHTML == "") {
         checkIfEmpty();
@@ -152,7 +162,7 @@ mixBtn.addEventListener("click", (e) => {
 
   //첫페이지 가리기
   firstPage.classList.add("hide");
-
+  secondPage.firstElementChild.classList.remove("hide");
   //두번째 페이지 보이기
   mixedItems.classList.remove("hide");
 
@@ -174,10 +184,14 @@ mixBtn.addEventListener("click", (e) => {
   for (let i = 0; i < itemList.length; i++) {
     let li = document.createElement("li");
     let inputText = document.createElement("textarea");
+    let coveredTopic = document.createElement("div");
+    coveredTopic.className = "covered-topic";
     li.className = "topic";
     li.classList.add("mixed-item");
     li.classList.add("d-flex");
+    li.classList.add("covered");
     li.innerHTML = itemList[i];
+    li.appendChild(coveredTopic);
     li.appendChild(inputText);
     mixedItems.appendChild(li);
   }
@@ -188,9 +202,19 @@ mixBtn.addEventListener("click", (e) => {
 
   //뒤로가기 버튼 기능
   backBtn.addEventListener("click", () => {
+    secondPage.firstElementChild.classList.add("hide");
     mixedItems.classList.add("hide");
     backBtn.classList.add("hide");
     firstPage.classList.remove("hide");
     mixedItems.innerHTML = "";
   });
+
+  const coveredTopic = document.querySelectorAll(".covered-topic");
+  if (coveredTopic.length >= 1) {
+    for (let i = 0; i <= coveredTopic.length; i++) {
+      coveredTopic[i].addEventListener("click", () => {
+        coveredTopic[i].style.display = "none";
+      });
+    }
+  }
 });

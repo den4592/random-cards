@@ -18,7 +18,7 @@ body {
 
 .section {
   width: 100%;
-  padding: 7rem 0;
+  padding: 5.5rem 0;
 }
 
 .title {
@@ -34,6 +34,7 @@ body {
   max-width: 800px;
   padding: 0 4rem;
   margin: 0 auto;
+  position: relative;
 }
 
 form {
@@ -108,12 +109,30 @@ input[type="text"]:focus {
   max-width: 1200px;
   justify-content: space-between;
   color: #fff;
+  position: relative;
 }
 
-.mixed-items .topic::after {
-  content: "";
+.covered-topic {
   width: 100%;
-  background-color: red;
+  height: 100%;
+  position: absolute;
+  top: 0%;
+  left: 0;
+  z-index: 1;
+  border: 2px solid #fff;
+  background: linear-gradient(90deg, #a0a6ee 0%, #00d2ff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.covered-topic:hover {
+  transform: scale(1.1);
+}
+
+.covered-topic::after {
+  content: "?";
+  font-size: 1.5rem;
 }
 
 .topic + .topic {
@@ -134,8 +153,17 @@ input[type="text"]:focus {
 }
 
 .back-btn {
-  color: red;
+  color: rgb(158, 37, 224);
   font-size: 2rem;
+  position: absolute;
+  top: -3.5rem;
+  left: 4rem;
+}
+
+.back-btn:hover {
+  color: #fff;
+  transition: 0.5s;
+  transform: translate(-10px, 0);
 }
 
 .mixed-item {
@@ -146,6 +174,13 @@ input[type="text"]:focus {
 .mixed-item input {
   margin-top: 1rem;
   width: 100%;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 35px;
   font-size: 1.2rem;
   outline-color: blue;
+  overflow: hidden;
+  position: relative;
 }
