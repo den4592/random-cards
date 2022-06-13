@@ -210,10 +210,22 @@ mixBtn.addEventListener("click", (e) => {
   });
 
   const coveredTopic = document.querySelectorAll(".covered-topic");
-  if (coveredTopic.length >= 1) {
-    for (let i = 0; i <= coveredTopic.length; i++) {
+  if (coveredTopic.length > 0) {
+    for (let i = 0; i < coveredTopic.length; i++) {
       coveredTopic[i].addEventListener("click", () => {
         coveredTopic[i].style.display = "none";
+
+        //textarea height resizing
+        const tx = document.getElementsByTagName("textarea");
+        for (let i = 0; i < tx.length; i++) {
+          tx[i].setAttribute("style", "height:" + tx[i].scrollHeight + "px;overflow-y:hidden;");
+          tx[i].addEventListener("input", OnInput, false);
+        }
+
+        function OnInput() {
+          this.style.height = "auto";
+          this.style.height = this.scrollHeight + "px";
+        }
       });
     }
   }

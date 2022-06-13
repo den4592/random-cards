@@ -171,16 +171,12 @@ input[type="text"]:focus {
   flex-direction: column;
 }
 
-.mixed-item input {
-  margin-top: 1rem;
-  width: 100%;
-}
-
 textarea {
+  margin-top: 1rem;
   resize: vertical;
   min-height: 35px;
   font-size: 1.2rem;
-  outline-color: blue;
-  overflow: hidden;
+  outline-color: rgb(119, 0, 255);
   position: relative;
+  padding: 0.2rem;
 }
